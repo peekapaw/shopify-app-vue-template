@@ -15,9 +15,12 @@
   "dependencies": {
     "@shopify/shopify-app-express": "^2.2.2",
     "@shopify/shopify-app-session-storage-sqlite": "^1.2.7",
+    "add": "^2.0.6",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
-    "serve-static": "^1.15.0"
+    "serve-static": "^1.15.0",
+    "vuetify": "^3.5.11",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "nodemon": "^3.0.1",

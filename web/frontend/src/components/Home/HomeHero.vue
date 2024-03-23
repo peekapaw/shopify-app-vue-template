@@ -1,6 +1,7 @@
 <template>
   <div class="main-container">
-    <TheWelcome></TheWelcome>
+    <!-- <TheWelcome></TheWelcome> -->
+    <v-btn>hello world</v-btn>
   </div>
 </template>
 
