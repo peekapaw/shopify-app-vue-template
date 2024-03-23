@@ -121,7 +121,7 @@ const addDraft = async ()=>{
   }
 }
 onMounted(() => {
-  useProductCounterStore().getProducts()
+ useProductCounterStore().getProducts()
 })
 </script>
 

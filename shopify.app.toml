@@ -1,20 +1,24 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-name = "my-node-app"
-client_id = "befe811ae89387b3a21c7b044a5fcf59"
-application_url = "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev"
+client_id = "ae60335e69dc86e5c137a5ac7777a68f"
+name = "node-vue-app"
+application_url = "https://didactic-lamp-976r7pp7v45cprrv-4040.app.github.dev"
 embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "carrierteststore.myshopify.com"
+include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products, write_draft_orders"
+scopes = "write_draft_orders,write_products"
 
 [auth]
 redirect_urls = [
-  "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev/auth/callback",
-  "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev/auth/shopify/callback",
-  "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev/api/auth/callback",
-  "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev/.shopify/graphiql/auth/callback"
+  "https://didactic-lamp-976r7pp7v45cprrv-4040.app.github.dev/auth/callback",
+  "https://didactic-lamp-976r7pp7v45cprrv-4040.app.github.dev/auth/shopify/callback",
+  "https://didactic-lamp-976r7pp7v45cprrv-4040.app.github.dev/api/auth/callback"
 ]
 
 [webhooks]

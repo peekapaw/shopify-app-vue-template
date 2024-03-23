@@ -13,6 +13,7 @@ export const useDraftOrderStore = defineStore('draftOrderStore', () => {
         throw new Error(`Failed to create products: ${response.status}`)
       }
       const data = await response.json()
+      console.log(data)
       if (!data.success) {
         throw new Error(`Failed to create products: ${data.error}`)
       }
