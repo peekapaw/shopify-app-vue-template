@@ -66,6 +66,9 @@
         <button @click.prevent="addProducts" :disabled="buttonDisabled">
           Create Sample Products
         </button>
+        <button @click.prevent="addDraft" >
+          Create Sample DraftOrder
+        </button>
       </div>
     </div>
   </div>
@@ -74,6 +77,7 @@
 <script setup>
 import { Loading, Toast } from '@shopify/app-bridge/actions'
 import { useProductCounterStore } from '@/stores/counter.js'
+import { useDraftOrderStore } from '@/stores/draftorder.js'
 import { ref, inject, onMounted, computed, version } from 'vue'
 const appBridge = inject('useAppBridge')
 const buttonDisabled = ref(false)
@@ -106,7 +110,16 @@ const addProducts = async () => {
     await appBridge.dispatch(Loading.Action.STOP)
   }
 }
-
+const addDraft = async ()=>{
+  try {
+    await useDraftOrderStore().createDraftOrder()
+    useToast('Successfully created products')
+  } catch (error) {
+    useToast('Error creating products', true)
+    buttonDisabled.value = false
+    await appBridge.dispatch(Loading.Action.STOP)
+  }
+}
 onMounted(() => {
   useProductCounterStore().getProducts()
 })

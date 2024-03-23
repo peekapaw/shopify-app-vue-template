@@ -1,3 +1,24 @@
-# This file stores configurations for your Shopify app.
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-scopes = "write_products"
+name = "my-node-app"
+client_id = "befe811ae89387b3a21c7b044a5fcf59"
+application_url = "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products, write_draft_orders"
+
+[auth]
+redirect_urls = [
+  "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev/auth/callback",
+  "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev/auth/shopify/callback",
+  "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev/api/auth/callback",
+  "https://legendary-spork-jjrvjxxjxj4c5595-4040.app.github.dev/.shopify/graphiql/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+[pos]
+embedded = false

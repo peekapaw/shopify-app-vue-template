@@ -6,6 +6,7 @@ import serveStatic from "serve-static";
 
 import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
+import createDraftOrder from "./discount-creator.js";
 import GDPRWebhookHandlers from "./gdpr.js";
 
 const PORT = parseInt(
@@ -59,7 +60,10 @@ app.get("/api/products/create", async (_req, res) => {
   }
   res.status(status).send({ success: status === 200, error });
 });
-
+app.get("/api/draftorder/create",async (_req,res)=>{
+const draftOrderData = await createDraftOrder({session:res.locals.shopify.session})
+console.log('draftOrderData',draftOrderData)
+})
 app.use(shopify.cspHeaders());
 app.use(serveStatic(STATIC_PATH, { index: false }));
 
