@@ -60,9 +60,17 @@ app.get("/api/products/create", async (_req, res) => {
   }
   res.status(status).send({ success: status === 200, error });
 });
-app.get("/api/draftorder/create",async (_req,res)=>{
-const draftOrderData = await createDraftOrder({session:res.locals.shopify.session})
-console.log('draftOrderData',draftOrderData)
+app.get("/api/draftorder/create", async (_req, res) => {
+  let status = 200;
+  let error = null;
+  try {
+    const draftOrderData = await createDraftOrder({ session: res.locals.shopify.session })
+  } catch (e) {
+    status = 500;
+    error = e.message;
+  }
+  res.status(status).send({ success: status === 200, error });
+
 })
 app.use(shopify.cspHeaders());
 app.use(serveStatic(STATIC_PATH, { index: false }));
