@@ -2,7 +2,8 @@
 
 client_id = "ae60335e69dc86e5c137a5ac7777a68f"
 name = "node-vue-app"
-application_url = "https://didactic-lamp-976r7pp7v45cprrv-4040.app.github.dev"
+handle = "node-vue-app-1"
+application_url = "https://redesigned-goldfish-4jq5jxxqqwqcj4j6-4040.app.github.dev"
 embedded = true
 
 [build]
@@ -16,9 +17,9 @@ scopes = "write_draft_orders,write_products"
 
 [auth]
 redirect_urls = [
-  "https://didactic-lamp-976r7pp7v45cprrv-4040.app.github.dev/auth/callback",
-  "https://didactic-lamp-976r7pp7v45cprrv-4040.app.github.dev/auth/shopify/callback",
-  "https://didactic-lamp-976r7pp7v45cprrv-4040.app.github.dev/api/auth/callback"
+  "https://redesigned-goldfish-4jq5jxxqqwqcj4j6-4040.app.github.dev/auth/callback",
+  "https://redesigned-goldfish-4jq5jxxqqwqcj4j6-4040.app.github.dev/auth/shopify/callback",
+  "https://redesigned-goldfish-4jq5jxxqqwqcj4j6-4040.app.github.dev/api/auth/callback"
 ]
 
 [webhooks]
