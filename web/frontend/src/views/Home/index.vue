@@ -8,7 +8,7 @@
     </v-card>
     <v-card class="mt-4">
       <v-row no-gutters>
-        <v-col sm="12" md="6" lg="4" xl="4">
+        <v-col sm="12" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
             <EntranceCard title="Discount roups">
               <template #icon>
@@ -19,7 +19,7 @@
             ></v-sheet
           >
         </v-col>
-        <v-col sm="12" md="6" lg="4" xl="4">
+        <v-col sm="12" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
             <EntranceCard title="Percentage discounts">
               <template #icon>
@@ -30,7 +30,7 @@
             ></v-sheet
           >
         </v-col>
-        <v-col sm="12" md="6" lg="4" xl="4">
+        <v-col sm="12" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
             <EntranceCard title="Individaual variant prices">
               <template #icon>
@@ -41,7 +41,7 @@
             ></v-sheet
           >
         </v-col>
-        <v-col sm="12" md="6" lg="4" xl="4">
+        <v-col sm="12" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
             <EntranceCard title="Individaual variant prices">
               <template #icon>
@@ -52,7 +52,7 @@
             ></v-sheet
           >
         </v-col>
-        <v-col sm="12" md="6" lg="4" xl="4">
+        <v-col sm="12" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
             <EntranceCard title="Individaual variant prices">
               <template #icon>
@@ -63,7 +63,7 @@
             ></v-sheet
           >
         </v-col>
-        <v-col sm="12" md="6" lg="4" xl="4">
+        <v-col sm="12" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
             <EntranceCard title="Individaual variant prices">
               <template #icon>
