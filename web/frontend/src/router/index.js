@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/Home/index.vue'
+// import DiscountGroup from '../views/DiscountGroup/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,6 +9,12 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/discount-groups',
+      name: 'discounts-group',
+      component: () => import('../views/DiscountGroup/index.vue')
+      // component: DiscountGroup
     },
     {
       path: '/about',
