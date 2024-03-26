@@ -8,7 +8,7 @@
       </div>
       <div class="text-left flex-1 leading-8">Discount Groups</div>
       <div class="flex-none">
-        <v-btn color="primary" variant="flat">Create discount group</v-btn>
+        <v-btn color="primary" variant="flat" @click="goAdd">Create discount group</v-btn>
       </div>
     </div>
     <v-card class="mx-auto mt-8 rounded-lg py-4">
@@ -51,6 +51,11 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const goAdd = () => {
+  router.push('/discount-groups/add')
+}
 const keyword = ref('')
 const desserts = [
   {

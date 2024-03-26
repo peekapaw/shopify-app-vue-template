@@ -17,6 +17,12 @@ const router = createRouter({
       // component: DiscountGroup
     },
     {
+      path: '/discount-groups/add',
+      name: 'discounts-group/add',
+      component: () => import('../views/DiscountGroup/add.vue')
+      // component: DiscountGroup
+    },
+    {
       path: '/percentage',
       name: 'percentage',
       component: () => import('../views/Percentage/index.vue')

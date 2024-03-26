@@ -8,7 +8,7 @@ import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import createDraftOrder from "./discount-creator.js";
 import GDPRWebhookHandlers from "./gdpr.js";
-
+import { createDiscountGroup } from "./models/discount-group.js";
 const PORT = parseInt(
   process.env.BACKEND_PORT || process.env.PORT || "3000",
   10
@@ -60,6 +60,20 @@ app.get("/api/products/create", async (_req, res) => {
   }
   res.status(status).send({ success: status === 200, error });
 });
+app.post("/api/discount-groups/create", async (req, res) => {
+  console.log("api/discount-groups/create", req.body)
+  let status = 200;
+  let error = null;
+  return res.status(200).send({ success: status === 200, error });
+  try {
+    const discountGroup = req.body
+    await createDiscountGroup(discountGroup)
+  } catch (e) {
+    status = 500;
+    error = e.message;
+  }
+  res.status(status).send({ success: status === 200, error });
+})
 app.get("/api/draftorder/create", async (_req, res) => {
   let status = 200;
   let error = null;
