@@ -6,10 +6,7 @@
           ><v-icon>mdi-arrow-left</v-icon></v-btn
         >
       </div>
-      <div class="text-left flex-1 leading-8">Discount Groups</div>
-      <div class="flex-none">
-        <v-btn color="primary" variant="flat">Create discount group</v-btn>
-      </div>
+      <div class="text-left flex-1 leading-8">Individual Variant pricing</div>
     </div>
     <v-card class="mx-auto mt-8 rounded-lg py-4">
       <div class="px-4">
@@ -26,21 +23,21 @@
       <v-table density="compact">
         <thead>
           <tr>
-            <th class="text-left">Discount title</th>
-            <th class="text-left">Customer tag</th>
-            <th class="text-left">Discount(%)</th>
-            <th class="text-left">Applies to</th>
-            <th class="text-left">Status</th>
+            <th class="text-left">Product Tags</th>
+            <th class="text-left" v-for="customerTag in customerTags" :key="customerTag">{{ customerTag }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in desserts" :key="item.title">
+          <tr v-for="(item, index) in desserts" :key="item.title">
             <td>{{ item.title }}</td>
-            <td>{{ item.customer_tag }}</td>
-            <td>{{ item.Discount }}</td>
-            <td>{{ item.Applies_to }}</td>
-            <td>
-              <div class="text-center bg-green-200 rounded-full">{{ item.Status }}</div>
+            <td class="pt-2" v-for="customerTag in customerTags" :key="customerTag">
+              <v-text-field
+                variant="outlined"
+                density="compact"
+                label="percentage"
+                v-model="form.percentage[index]"
+                suffix="%"
+              ></v-text-field>
             </td>
           </tr>
         </tbody>
@@ -52,6 +49,8 @@
 <script setup>
 import { ref } from 'vue'
 const keyword = ref('')
+const form = ref({ percentage: [] })
+const customerTags = ref(['VIP', 'Gold', 'Silver', 'Bronze'])
 const desserts = [
   {
     title: 'Group A',

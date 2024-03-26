@@ -17,6 +17,24 @@ const router = createRouter({
       // component: DiscountGroup
     },
     {
+      path: '/percentage',
+      name: 'percentage',
+      component: () => import('../views/Percentage/index.vue')
+      // component: DiscountGroup
+    },
+    {
+      path: '/individual-variant',
+      name: 'individual-variant',
+      component: () => import('../views/IndividualVariant/index.vue')
+      // component: DiscountGroup
+    },
+    {
+      path: '/volume-discount',
+      name: 'volume-discount',
+      component: () => import('../views/VolumeDiscount/index.vue')
+      // component: DiscountGroup
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

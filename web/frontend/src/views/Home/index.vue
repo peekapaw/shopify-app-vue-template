@@ -21,7 +21,7 @@
         </v-col>
         <v-col sm="6" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
-            <EntranceCard title="Percentage discounts">
+            <EntranceCard title="Percentage discounts" @click="onEnterance('/percentage')">
               <template #icon>
                 <v-icon size="36">mdi-label-percent-outline</v-icon>
               </template>
@@ -32,7 +32,7 @@
         </v-col>
         <v-col sm="6" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
-            <EntranceCard title="Individaual variant prices">
+            <EntranceCard title="Individaual variant prices" @click="onEnterance('/individual-variant')">
               <template #icon>
                 <v-icon size="36">mdi-tag-multiple-outline</v-icon>
               </template>
@@ -43,7 +43,7 @@
         </v-col>
         <v-col sm="6" md="12" lg="4" xl="4">
           <v-sheet class="ma-2 pa-2">
-            <EntranceCard title="Volume discounts">
+            <EntranceCard title="Volume discounts" @click="onEnterance('/volume-discount')">
               <template #icon>
                 <v-icon size="36">mdi-cart-percent</v-icon>
               </template>
