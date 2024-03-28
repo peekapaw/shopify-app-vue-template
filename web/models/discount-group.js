@@ -3,5 +3,5 @@ export function createDiscountGroup(discountGroup) {
     return db
         .collection('discount-group')
         .insertOne(discountGroup)
-        .then(result => result.insertedId)
+        .then(result => result.insertedId).catch(e => console.error(e))
 }

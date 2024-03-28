@@ -1,16 +1,10 @@
 <template>
   <div>
-    <div class="flex justify-between">
-      <div class="flex-none mr-4">
-        <v-btn class="transform-none" color="primary" variant="outlined" @click="$router.go(-1)"
-          ><v-icon>mdi-arrow-left</v-icon></v-btn
-        >
-      </div>
-      <div class="text-left flex-1 leading-8">Discount Groups</div>
-      <div class="flex-none">
+    <page-header title="Discount groups">
+      <template #actions>
         <v-btn color="primary" variant="flat" @click="goAdd">Create discount group</v-btn>
-      </div>
-    </div>
+      </template>
+    </page-header>
     <v-card class="mx-auto mt-8 rounded-lg py-4">
       <div class="px-4">
         <v-text-field
@@ -50,8 +44,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import PageHeader from '@/components/PageHeader/index.vue'
 const router = useRouter()
 const goAdd = () => {
   router.push('/discount-groups/add')
