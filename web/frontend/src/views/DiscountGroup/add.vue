@@ -50,9 +50,14 @@
         </v-card>
       </div>
       <div class="sider flex-none w-1/3">
-        <v-card title="Title">
+        <v-card title="Status">
           <div class="px-4">
-            <v-text-field label="Discount Group Title" variant="outlined" density="compact"></v-text-field>
+            <v-switch
+          v-model="form.enable"
+          color="primary"
+          :label="statusLabel"
+        ></v-switch>
+            
           </div>
         </v-card>
       </div>
@@ -73,13 +78,19 @@
 import { ref } from 'vue'
 import { useDiscountStore } from '@/stores/discount'
 import PageHeader from '@/components/PageHeader/index.vue'
+import { computed } from 'vue';
 
 const form = ref({
   title: '',
   customerTag: '',
   appliesTo: 'All',
   minRequirements: [],
-  shippingRate: 'default'
+  shippingRate: 'default',
+  enable: true
+})
+
+const statusLabel = computed(() => {
+  return form.value.enable ? 'Enabled' : 'Disabled'
 })
 const discountStore = useDiscountStore()
 const save = () => {

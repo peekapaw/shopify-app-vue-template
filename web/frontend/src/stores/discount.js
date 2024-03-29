@@ -33,5 +33,26 @@ export const useDiscountStore = defineStore('discountStore', () => {
     }
   }
 
-  return { createDiscountGroup, getDiscountGroups }
+  // update collection
+  const updateDiscountGroupById = async (params) => {
+    const payload = Object.fromEntries(params)
+    delete payload.id
+    try {
+      const response = await fetch(`/api/discount-groups/update/${params.id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      const data = await response.json()
+      return data
+    } catch (error) {
+      console.log(`Failed to update discount groups: ${error.message}`)
+    }
+
+
+  }
+
+  return { createDiscountGroup, getDiscountGroups, updateDiscountGroupById }
 })
