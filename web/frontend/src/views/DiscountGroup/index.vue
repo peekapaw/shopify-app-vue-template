@@ -2,14 +2,14 @@
   <div>
     <page-header title="Discount groups">
       <template #actions>
-        <v-btn color="primary" variant="flat" @click="goAdd">Create discount group</v-btn>
+        <v-btn color="primary" variant="flat" @click="goAdd">CREATE</v-btn>
       </template>
     </page-header>
     <v-skeleton-loader type="article" v-if="loading"></v-skeleton-loader>
     <v-card class="mx-auto mt-8 rounded-lg py-4" v-else>
       <div class="px-4">
-        <v-text-field class="mb-2" label="" v-model="keyword" placeholder="Search by customer tags"
-          prepend-inner-icon="mdi-magnify" variant="outlined"></v-text-field>
+        <v-text-field class="mb-2" label="" @keydown.enter.prevent="onSearch" v-model="keyword"
+          placeholder="Search by customer tags" prepend-inner-icon="mdi-magnify" variant="outlined"></v-text-field>
       </div>
 
       <v-table density="compact">
@@ -27,7 +27,7 @@
           <tr v-for="item in desserts" :key="item.title">
             <td>{{ item.title }}</td>
             <td>{{ item.customerTag }}</td>
-            <td>{{ item.Discount || '-' }}</td>
+            <td>{{ item.discount_value }}%</td>
             <td>{{ item.appliesTo }}</td>
             <td>
               <!-- <div class="text-center bg-green-200 rounded-full"></div> -->
@@ -36,9 +36,16 @@
               </v-chip>
               <v-chip color="red" v-else>Disabled</v-chip>
             </td>
-            <td><v-btn variant="text">
-                Action
-              </v-btn></td>
+            <td>
+              <div class="flex">
+                <v-btn variant="text" color="primary" @click="goEdit(item.id)">
+                  Edit
+                </v-btn>
+                <v-btn variant="text" @click="handleDelete(item.id)" color="error">
+                  Delete
+                </v-btn>
+              </div>
+            </td>
           </tr>
         </tbody>
       </v-table>
@@ -59,17 +66,39 @@ const goAdd = () => {
 const keyword = ref('')
 const desserts = ref([])
 const store = useDiscountStore()
-onMounted(() => {
+
+const onSearch = () => {
   loading.value = true
-  // get discount group collection
-  store.getDiscountGroups().then((res) => {
-    if (res.success) {
+  getDataList({ customerTag: keyword.value })
+}
+const getDataList = (params) => {
+  store.getDiscountGroups(params).then((res) => {
+    if (res?.success) {
       desserts.value = res.data
     }
   }).finally(() => {
     loading.value = false
   })
+}
+onMounted(() => {
+  loading.value = true
+  getDataList()
+  // get discount group collection
+
 })
+const handleDelete = (id) => {
+  store.deleteDiscountGroup(id).then((res) => {
+    if (res.success) {
+      desserts.value = desserts.value.filter((item) => item.id !== id)
+    }
+  })
+}
+const goEdit = (id) => {
+  router.push({
+    path: '/discount-groups/add',
+    query: { id }
+  })
+}
 </script>
 
 <style lang="scss" scoped></style>

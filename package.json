@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@shopify/app": "^3.57.1",
-    "@shopify/cli": "^3.57.1"
+    "@shopify/cli": "^3.57.1",
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.1"
   }
 }

@@ -3,12 +3,19 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import express from "express";
 import serveStatic from "serve-static";
-
+import _ from "lodash";
 import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import createDraftOrder from "./discount-creator.js";
 import GDPRWebhookHandlers from "./gdpr.js";
-import { createDiscountGroup, getDiscountGroups,updateRecordById } from "./models/discount-group.js";
+import { v4 as uuidv4 } from 'uuid';
+import {
+  createDiscountGroup,
+  getDiscountGroups,
+  updateRecordById,
+  deleteDiscountGroup,
+  getDiscountGroupsById
+} from "./models/discount-group.js";
 const PORT = parseInt(
   process.env.BACKEND_PORT || process.env.PORT || "3000",
   10
@@ -64,8 +71,15 @@ app.post("/api/discount-groups/create", async (req, res) => {
   let status = 200;
   let error = null;
   try {
+    const session = res.locals.shopify.session
+    console.log('%c 🍚 session: ', 'font-size:12px;background-color: #7F2B82;color:#fff;', session);
     const discountGroup = req.body
-    await createDiscountGroup(discountGroup)
+    const payload = _.cloneDeep(discountGroup)
+    const id = uuidv4()
+    payload.id = id
+    payload.shop = session.shop
+    return false
+    await createDiscountGroup(payload)
   } catch (e) {
     status = 500;
     error = e.message;
@@ -76,27 +90,56 @@ app.get("/api/discount-groups/list", async (req, res) => {
   let status = 200;
   let error = null;
   let data = []
+  const query = req.query
   try {
-    const query = req.body
-    data = await getDiscountGroups()
+    // @ts-ignore
+    data = await getDiscountGroups(query)
   } catch (e) {
     status = 500;
     error = e.message;
   }
   res.status(status).send({ success: status === 200, error, data });
 })
-app.post("/api/discount-groups/update/:id", async (req, res) => {
+app.get("/api/discount-groups/detail/:id", async (req, res) => {
   let status = 200;
   let error = null;
   let data = []
+  const query = req.params
   try {
-    const query = req.body
-    await updateRecordById(query)
+    // @ts-ignore
+    data = await getDiscountGroupsById(query)
   } catch (e) {
     status = 500;
     error = e.message;
   }
   res.status(status).send({ success: status === 200, error, data });
+})
+
+app.post("/api/discount-groups/update", async (req, res) => {
+  let status = 200;
+  let error = null;
+  try {
+    const query = req.body
+    console.log('%c 🦑 query: ', 'font-size:12px;background-color: #ED9EC7;color:#fff;', query);
+    const data = await updateRecordById(query)
+  } catch (e) {
+    status = 500;
+    error = e.message;
+  }
+  res.status(status).send({ success: status === 200, error });
+})
+app.post("/api/discount-groups/delete", async (req, res) => {
+  let status = 200;
+  let error = null;
+  try {
+    const query = req.body
+    const id = query.id
+    const data = await deleteDiscountGroup(id)
+  } catch (e) {
+    status = 500;
+    error = e.message;
+  }
+  res.status(status).send({ success: status === 200, error });
 })
 app.get("/api/draftorder/create", async (_req, res) => {
   let status = 200;

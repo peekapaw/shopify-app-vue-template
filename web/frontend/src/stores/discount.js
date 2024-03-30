@@ -20,9 +20,23 @@ export const useDiscountStore = defineStore('discountStore', () => {
     }
   }
   // 获取集合
-  const getDiscountGroups = async () => {
+  const getDiscountGroups = async (params) => {
     try {
-      const response = await fetch('/api/discount-groups/list')
+      const queryString = new URLSearchParams(params).toString()
+      const response = await fetch(`/api/discount-groups/list?${queryString}`)
+      if (!response.ok) {
+        throw new Error(`Failed to fetch discount groups: ${response.status}`)
+      }
+      const data = await response.json()
+      return data
+    } catch (error) {
+      console.log(`Failed to fetch discount groups: ${error.message}`)
+    }
+  }
+
+  const getDiscountGroupById = async (id) => {
+    try {
+      const response = await fetch(`/api/discount-groups/detail/${id}`)
       if (!response.ok) {
         throw new Error(`Failed to fetch discount groups: ${response.status}`)
       }
@@ -35,24 +49,35 @@ export const useDiscountStore = defineStore('discountStore', () => {
 
   // update collection
   const updateDiscountGroupById = async (params) => {
-    const payload = Object.fromEntries(params)
-    delete payload.id
     try {
-      const response = await fetch(`/api/discount-groups/update/${params.id}`, {
+      const response = await fetch(`/api/discount-groups/update`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(params)
       })
       const data = await response.json()
       return data
     } catch (error) {
       console.log(`Failed to update discount groups: ${error.message}`)
     }
-
-
+  }
+  const deleteDiscountGroup = async (id) => {
+    try {
+      const response = await fetch('/api/discount-groups/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+      })
+      const data = await response.json()
+      return data
+    } catch (error) {
+      console.log(`Failed to delete discount groups: ${error.message}`)
+    }
   }
 
-  return { createDiscountGroup, getDiscountGroups, updateDiscountGroupById }
+  return { createDiscountGroup, getDiscountGroups, updateDiscountGroupById, deleteDiscountGroup, getDiscountGroupById }
 })
