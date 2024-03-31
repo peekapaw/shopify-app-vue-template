@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 const connectionString = process.env.ATLAS_URI || "mongodb://adminwellen:pkpadminwellen@127.0.0.1:27017";
-const client = new MongoClient(connectionString, { useUnifiedTopology: true });
+const client = new MongoClient(connectionString);
 let conn;
 try {
   conn = await client.connect();

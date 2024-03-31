@@ -114,6 +114,7 @@
         <v-btn color="primary" @click="onSave">SAVE</v-btn>
       </div>
     </div>
+    <CollectionSelector v-model:visible="dialogCollection" />
   </div>
 
 </template>
@@ -124,8 +125,9 @@ import { useDiscountStore } from '@/stores/discount'
 import PageHeader from '@/components/PageHeader/index.vue'
 import { computed } from 'vue';
 import { useRoute } from 'vue-router'
+import CollectionSelector from '@//components/CollectionSelector/index.vue'
 const query = useRoute().query
-
+const dialogCollection = ref(false)
 const form = ref({
   title: '',
   customerTag: '',

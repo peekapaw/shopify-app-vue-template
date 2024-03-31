@@ -78,6 +78,19 @@ export const useDiscountStore = defineStore('discountStore', () => {
       console.log(`Failed to delete discount groups: ${error.message}`)
     }
   }
+  const getCollectionList = async () => {
+    try {
+      const response = await fetch(`/api/discount-groups/collection`)
+      if (!response.ok) {
+        throw new Error(`Failed to fetch collection: ${response.status}`)
+      }
+      const data = await response.json()
+      return data
+    } catch (error) {
+      console.log(`Failed to fetch collection: ${error.message}`)
+    }
 
-  return { createDiscountGroup, getDiscountGroups, updateDiscountGroupById, deleteDiscountGroup, getDiscountGroupById }
+  }
+
+  return { createDiscountGroup, getDiscountGroups, updateDiscountGroupById, deleteDiscountGroup, getDiscountGroupById, getCollectionList }
 })
